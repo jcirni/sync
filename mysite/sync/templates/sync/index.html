@@ -1,0 +1,97 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-dark bg-dark" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{% url 'index' %}">Sync</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'index' %}">Home</a>
+      <a class="nav-item nav-link" href="{% url 'participants' %}">Participant List</a>
+    </div>
+  </div>
+  </nav>
+
+  <div class="container">
+    {% if form_error %}<p><strong>{{ form_error }}</strong></p>{% endif %}
+      <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <form action="{% url 'new' %}" class="needs-validation border rounded" method="post" novalidate>
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="offset-md-1 col-md-10 offset-sm-1 col-sm-10">
+                  <label for="validationCustom01">Name</label>
+                  {{ form.name }}
+                  <div class="invalid-feedback">
+                    Please complete field
+                  </div>
+                  <div class="valid-feedback"></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="offset-md-1 col-md-10 offset-sm-1 col-sm-10">
+                  <label for="validationCustom01">Age</label>
+                    {{ form.age }}
+                    <div class="invalid-feedback">
+                      Please complete field
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="offset-md-1 col-md-10 offset-sm-1 col-sm-10">
+                    <label for="validationCustom01">Has Siblings</label>
+                    {{ form.siblings }}
+                  </div>
+                  <div class="invalid-feedback">
+                    Please complete field
+                  </div>
+                </div>
+              <div class="form-row">
+                <div class="offset-md-1 col-md-10 offset-sm-1 col-sm-10">
+                  <label for="validationCustom01">Exposure</label>
+                  {{ form.exposures }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="offset-md-1 col-md-10 offset-sm-1 col-sm-10">
+                  <label for="validationCustom01">Mutations</label>
+                  {{ form.mutations }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-10 text-center">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </div>
+            </form>
+          </div>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'sync/style.css' %}" />
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>

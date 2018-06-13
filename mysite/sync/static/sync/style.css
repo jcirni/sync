@@ -1,0 +1,15 @@
+.container {
+   padding-top: 20px;
+ }
+
+.btn.ReviewedAccepted {
+  background-color: green;
+}
+
+.btn.ReviewedNotAccepted {
+  background-color: red;
+}
+
+.btn.NotReviewed {
+  background-color: orange;
+}

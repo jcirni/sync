@@ -1,0 +1,64 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-dark bg-dark" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{% url 'index' %}">Sync</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'index' %}">Home</a>
+      <a class="nav-item nav-link" href="{% url 'participants' %}">Participant List</a>
+    </div>
+  </div>
+  </nav>
+
+  {% if participant_list %}
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Has Siblings</th>
+        <th scope="col">Exposures</th>
+        <th scope="col">Mutations</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+      <tbody>
+        {% for participant in participant_list %}
+          <tr>
+            <th scope="row">{{ participant.id }}</th>
+            <td>{{ participant.name }}</td>
+            <td>{{ participant.age }}</td>
+            <td>{{ participant.siblings }}</td>
+            <td>{{ participant.exposures }}</td>
+            <td>{{ participant.mutations }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle {{ participant.status|cut:" " }}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ participant.status }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'new_status' participant_id=participant.id participant_status='Not Reviewed' %}">Not Reviewed</a>
+                  <a class="dropdown-item" href="{% url 'new_status' participant_id=participant.id participant_status='Reviewed Accepted' %}">Reviewed Accepted</a>
+                  <a class="dropdown-item" href="{% url 'new_status' participant_id=participant.id participant_status='Reviewed Not Accepted' %}">Reviewed Not Accepted</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+      {% endfor %}
+  {% else %}
+    <p>No participants in database</p>
+    </table>
+  {% endif %}
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'sync/style.css' %}" />
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
