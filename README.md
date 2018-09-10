@@ -1,5 +1,5 @@
-#Sync 
-###application for collecting and storing user data for Department of Biomedical Informatics at Harvard Med School 
+# Sync 
+### application for collecting and storing user data for Department of Biomedical Informatics at Harvard Med School 
 ## Set up Environment
 ```
 dnf install python-virtualenv
@@ -7,7 +7,7 @@ mkdir syncapp && cd $_
 mkdir syncenv
 virtualenv syncenv
 ```
-##Get and Run Application
+## Get and Run Application
 ```
 git clone https://github.com/jcirni/sync.git
 source syncenv/bin/activate
